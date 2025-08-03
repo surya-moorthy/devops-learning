@@ -5,19 +5,16 @@ import (
 	"log"
 	"net/http"
 	"os"
-
 	"gorm.io/gorm"
-
 	"github.com/devops-learning/fiber-postgres/models"
 	"github.com/devops-learning/fiber-postgres/storage"
 	"github.com/gofiber/fiber/v2"
-	"github.com/joho/godotenv"
 )
 
 type Todo struct {
 	Title          string     `json:"title"`
 	Description    string     `json:"description"`
-	Status         string      `json:"status"`
+	Status         string     `json:"status"`
 }
 
 type Repository struct {
@@ -155,12 +152,13 @@ func(r *Repository) SetupRoutes(app *fiber.App) {
 	api.Get("/todo/todos",r.GetTodos)
 	api.Get("/todo/:id",r.GetTodoById)
 }
+
 func main() {
-	err := godotenv.Load(".env")
+	// err := godotenv.Load(".env")
     
-	if err != nil {
-		log.Fatal(err)
-	}
+	// if err != nil {
+	// 	log.Fatal(err)
+	// }
 
     config := &storage.Config {
 		Host: os.Getenv("DB_HOST"),
