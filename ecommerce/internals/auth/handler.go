@@ -28,7 +28,7 @@ func(h *AuthRepository) Login(context *fiber.Ctx) error {
 		)
 	}
 
-    err = h.GetUserByEmail(user.Email,user.Password)
+    getUser , err := h.GetUserByEmail(user.Email,user.Password)
 
 	if err != nil {
 		context.Status(http.StatusBadRequest).JSON(
@@ -36,7 +36,7 @@ func(h *AuthRepository) Login(context *fiber.Ctx) error {
 		)
 	}
 
-    token , err := createToken(*user.Username,*user.Email)
+    token , err := createToken(*getUser.Username,*getUser.Email)
 
 	if err != nil {
 		context.Status(http.StatusInternalServerError).JSON(

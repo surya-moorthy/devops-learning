@@ -5,12 +5,12 @@ import "gorm.io/gorm"
 
 type UserModel struct {
 	ID           uint      `gorm:"primary key:autoIncrement" json:id`
-    Email       *string    `json:email`
+    Email       *string    `gorm:"not null" json:email`
 	Username    *string    `json:username`  
-	Password    *string    `json:password`
+	Password    *string    `gorm:"not null" json:password`
 }
 
-func MigrateUser(db *gorm.DB) error {
+func MigrateAll(db *gorm.DB) error {
 	err := db.AutoMigrate(&UserModel{})
     return err	
 }
