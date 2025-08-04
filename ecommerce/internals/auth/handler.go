@@ -99,8 +99,6 @@ func(h *AuthRepository) ResetPassword(context *fiber.Ctx) error {
    return nil
 }
 
-
-
 func(h *AuthRepository) Logout(context *fiber.Ctx) error {
    
 	context.Status(http.StatusOK).JSON( &fiber.Map{"message" : "User Logged out Successfully"})

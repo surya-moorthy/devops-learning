@@ -10,6 +10,8 @@ type UserModel struct {
 	Password    *string    `gorm:"not null" json:password`
 }
 
+
+
 func MigrateAll(db *gorm.DB) error {
 	err := db.AutoMigrate(&UserModel{})
     return err	
