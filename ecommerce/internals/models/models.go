@@ -5,20 +5,20 @@ import (
 	"gorm.io/gorm"
 )
 
-// User represents a user in the system
-type User struct {
-	ID        uint           `gorm:"primaryKey;autoIncrement" json:"id"`
-	Email     string         `gorm:"not null;unique;size:255" json:"email"`
-	Username  string         `gorm:"size:50" json:"username,omitempty"`
-	Password  string         `gorm:"not null;size:255" json:"password"` // Never expose password in JSON
-	CreatedAt time.Time      `json:"created_at"`
-	UpdatedAt time.Time      `json:"updated_at"`
-	DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
-	
-	// Relationships
-	Cart   *Cart   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"cart,omitempty"`
-	Orders []Order `gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"orders,omitempty"`
-}
+	// User represents a user in the system
+	type User struct {
+		ID        uint           `gorm:"primaryKey;autoIncrement" json:"id"`
+		Email     string         `gorm:"not null;unique;size:255" json:"email"`
+		Username  string         `gorm:"size:50" json:"username,omitempty"`
+		Password  string         `gorm:"not null;size:255" json:"password"` // Never expose password in JSON
+		CreatedAt time.Time      `json:"created_at"`
+		UpdatedAt time.Time      `json:"updated_at"`
+		DeletedAt gorm.DeletedAt `gorm:"index" json:"-"`
+		
+		// Relationships
+		Cart   *Cart   `gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"cart,omitempty"`
+		Orders []Order `gorm:"foreignKey:UserID;constraint:OnUpdate:CASCADE,OnDelete:CASCADE;" json:"orders,omitempty"`
+	}
 
 // TableName overrides the table name
 func (User) TableName() string {
@@ -27,17 +27,12 @@ func (User) TableName() string {
 
 // Product represents a product in the catalog
 type Product struct {
-	ID          uint           `gorm:"primaryKey;autoIncrement" json:"id"`
-	Name        string         `gorm:"not null;size:255;index" json:"name"`
-	Description *string        `gorm:"type:text" json:"description,omitempty"`
-	Price       float64        `gorm:"not null;type:decimal(10,2);check:price >= 0" json:"price"`
-	Stock       uint           `gorm:"not null;default:0" json:"stock"`
-	ImageURL    *string        `gorm:"size:500" json:"image_url,omitempty"`
-	IsActive    bool           `gorm:"default:true;index" json:"is_active"`
-	SKU         *string        `gorm:"size:50;unique" json:"sku,omitempty"`
-	CreatedAt   time.Time      `json:"created_at"`
-	UpdatedAt   time.Time      `json:"updated_at"`
-	DeletedAt   gorm.DeletedAt `gorm:"index" json:"-"`
+	gorm.Model
+	Name        string  `gorm:"not null" json:"name"`
+	Description string  `json:"description,omitempty"`
+	Price       float64 `gorm:"not null" json:"price"`
+	Stock       uint    `gorm:"not null" json:"stock"`
+	ImageURL    string  `json:"image_url,omitempty"`
 }
 
 // Cart represents a user's shopping cart
