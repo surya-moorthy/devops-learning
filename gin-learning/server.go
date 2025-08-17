@@ -1,6 +1,10 @@
 package main
 
-import "github.com/gin-gonic/gin"
+import (
+	"github.com/gin-gonic/gin"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
+)
 
 
 type PostTask struct {
@@ -18,7 +22,19 @@ type Task struct {
 var task Task
 
 func main() {
-	server := gin.Default();  // helps for logging funcs andrecoveries
+	server := gin.Default()  // helps for logging funcs andrecoveries
+
+// database connection
+
+    connString := "host=localhost user=todouser password=todopassword dbname=tododb port=5432 sslmode=disable"
+
+	db, err := gorm.Open(postgres.Open(connString),&gorm.Config{})
+
+	if err != nil {
+		panic("failed to connect database")
+	}
+
+
 
 	server.GET("/",func(ctx *gin.Context) {
 		ctx.JSON(200,gin.H {

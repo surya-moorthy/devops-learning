@@ -1,0 +1,32 @@
+package main
+
+import "testing"
+
+// testing.T is to get the state of the test case 
+
+func TestHello(T *testing.T  ) {   // name must be in Testxxx
+	// subsets 
+   T.Run("saying hello with name", func(t *testing.T) {
+	    got := Hello("Chris")
+		want := "Hello, Chris"
+
+		
+   })
+
+   //  subsets
+   T.Run("say Hello, World when there is no string", func(t *testing.T) {
+	   got := Hello("")
+	   want := "Hello, World"
+
+	   if got != want {
+			t.Errorf("got %q want %q",got , want)
+		}
+   })
+}
+
+func asseetErrorMessage(t testing.TB, got , want string)  {
+	t.Helper()
+	if got != want {
+		t.Errorf("got %q want %q",got , want)
+	}
+}

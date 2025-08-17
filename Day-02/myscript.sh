@@ -1,29 +1,32 @@
 #!/usr/bin/bash
 
+choice=4
 
-array=("Hello world" Hello world "dandan dandan")
+echo "1.Bash"
+echo "2.Scripting"
+echo "3.Tutorial"
+echo "4.Exit"
+echo -n "Enter your choice:"
 
-ELEMENTS=${#array[@]}
+while [ $choice -eq 4 ]; do
 
-for ((i=0;i<$ELEMENTS;i++)); do 
-    echo ${array[${i}]}
-done 
+read choice
+ 
+if [ $choice -eq 1 ]; then
+  
+ echo "You want to enter into bash"
 
-declare -a ARRAY
+else 
+    if [ $choice -eq 2 ]; then 
+       echo "You want to Scripting Huh!"
 
-#creating a file descriptor for reading
+    else [ $choice -eq 3 ]; 
+       echo "You want to watch tutorial!"
+       if [ $choice -eq  4 ]; then
+          exit
+        fi
+    fi
+fi
 
-exec 10<&0
-
-exec < $1
-
-while read LINE; do 
-     ARRAY[$count]=$LINE
-     ((count++))
 done
 
-echo Number of elements : ${#ARRAY[@]}
-
-echo ${ARRAY[@]}
-
-exec 0<&10 10<&-

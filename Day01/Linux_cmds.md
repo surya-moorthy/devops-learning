@@ -9,3 +9,6 @@
   ### 7.pwd   -   provide the current directory path.
   ### 8.df    -   diplay disk free system in the linux.
   ### 9.chmod -   Change the file permissions of the file(read(4),write(2),execute(1))
+  ### 10.cp   -   copy the file.
+  ### 11.mv   -   move the file.
+  ### 12.mkdir , rmdir - create , delete folder.

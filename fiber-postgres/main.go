@@ -5,10 +5,12 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"gorm.io/gorm"
+
 	"github.com/devops-learning/fiber-postgres/models"
 	"github.com/devops-learning/fiber-postgres/storage"
 	"github.com/gofiber/fiber/v2"
+	"github.com/joho/godotenv"
+	"gorm.io/gorm"
 )
 
 type Todo struct {
@@ -143,7 +145,7 @@ func(r *Repository) GetTodoById(ctx *fiber.Ctx) error {
 	})
 	return nil
 }
-
+		
 func(r *Repository) SetupRoutes(app *fiber.App) {
 	api := app.Group("/api")
 	api.Post("/todo",r.CreateTodo)
@@ -154,11 +156,11 @@ func(r *Repository) SetupRoutes(app *fiber.App) {
 }
 
 func main() {
-	// err := godotenv.Load(".env")
+	err := godotenv.Load(".env")
     
-	// if err != nil {
-	// 	log.Fatal(err)
-	// }
+	if err != nil {
+		log.Fatal(err)
+	}
 
     config := &storage.Config {
 		Host: os.Getenv("DB_HOST"),
