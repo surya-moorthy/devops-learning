@@ -1,4 +1,4 @@
-package main
+package hello
 
 import "testing"
 
@@ -9,7 +9,7 @@ func TestHello(T *testing.T  ) {   // name must be in Testxxx
    T.Run("saying hello with name", func(t *testing.T) {
 	    got := Hello("Chris")
 		want := "Hello, Chris"
-
+        asseetErrorMessage(T,got,want)
 		
    })
 
@@ -17,10 +17,7 @@ func TestHello(T *testing.T  ) {   // name must be in Testxxx
    T.Run("say Hello, World when there is no string", func(t *testing.T) {
 	   got := Hello("")
 	   want := "Hello, World"
-
-	   if got != want {
-			t.Errorf("got %q want %q",got , want)
-		}
+       asseetErrorMessage(T,got,want)
    })
 }
 
