@@ -3,7 +3,7 @@ package looping
 import "testing"
 
 func TestLooping(t *testing.T) {
-	got := Repeat("a")
+	got := Repeat("a",6)
 	expected := "aaaaaa"
 	asseetErrorMessage(t,got,expected)
 }
@@ -17,6 +17,6 @@ func asseetErrorMessage(t testing.TB, got , want string)  {
 
 func BenchmarkLooping(b *testing.B) {
    for b.Loop() {
-	  Repeat("a")
+	  Repeat("a",10)
    }	
 }
